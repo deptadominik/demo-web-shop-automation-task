@@ -7,6 +7,7 @@ export class ProductDetailsPage extends BasePage {
   private readonly productPrice: Locator;
   private readonly quantityInput: Locator;
   private readonly addToCartButton: Locator;
+  private readonly notificationBar: Locator;
 
   constructor(page: any) {
     super(page);
@@ -15,7 +16,7 @@ export class ProductDetailsPage extends BasePage {
     this.productPrice = this.page.locator(".product-price");
     this.quantityInput = this.page.locator("input.qty-input");
     this.addToCartButton = this.page.locator('[id^="add-to-cart-button"]');
-
+    this.notificationBar = this.page.locator("#bar-notification");
     this.processorOptions = this.page.locator(".attributes label");
   }
 
@@ -31,6 +32,7 @@ export class ProductDetailsPage extends BasePage {
 
   async addToCart() {
     await this.addToCartButton.click();
+    await this.notificationBar.waitFor();
   }
 
   getProductName(): Locator {
